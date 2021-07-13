@@ -10,7 +10,7 @@ namespace CalculatorTest.Console.Helpers
         {
             var apiClient = new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:44344/api/values/")
+                BaseAddress = new Uri("https://localhost:28261/")
             };
             apiClient.DefaultRequestHeaders.Accept.Clear();
             apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

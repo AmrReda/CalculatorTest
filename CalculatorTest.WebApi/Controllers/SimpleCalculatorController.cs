@@ -3,7 +3,7 @@
 namespace CalculatorTest.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("calculator")]
     public class SimpleCalculatorController : ControllerBase
     { 
         private readonly ISimpleCalculator _simpleCalculator;
@@ -13,27 +13,27 @@ namespace CalculatorTest.WebApi.Controllers
             _simpleCalculator = simpleCalculator;
         }
 
-        [HttpGet("/Add")]
+        [HttpGet("/add")]
         public IActionResult Add(int start, int amount)
         {
             var result = _simpleCalculator.Add(start, amount);
             return Ok(result);
         }
-        [HttpGet("/Subtract")]
+        [HttpGet("/subtract")]
         public IActionResult Subtract(int start, int amount)
         {
             var result = _simpleCalculator.Subtract(start, amount);
 
             return Ok(result);
         }
-        [HttpGet("/Multiply")]
+        [HttpGet("/multiply")]
         public IActionResult Multiply(int start, int amount)
         {
             var result = _simpleCalculator.Multiply(start, amount);
 
             return Ok(result);
         }
-        [HttpGet("/Divide")]
+        [HttpGet("/divide")]
         public IActionResult Divide(int start, int amount)
         {
             var result = _simpleCalculator.Divide(start, amount);
