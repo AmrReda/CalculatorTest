@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Data.SqlClient;
 using CalculatorTest.DataAccess.Models;
+using Microsoft.Extensions.Options;
 
 namespace CalculatorTest.DataAccess
 {
     public class DbDiagnosticsNoEF : IDiagnostics
     {
+        private readonly CalcualtorDatabaseConfig _configOptions;
+
+        public DbDiagnosticsNoEF(IOptions<CalcualtorDatabaseConfig> configOptions)
+        {
+            _configOptions = configOptions.Value;
+        }
+
+
         public void LogInformation(string message)
         {
             string sqlString = "INSERT INTO " +
@@ -19,8 +28,8 @@ namespace CalculatorTest.DataAccess
                                "@l_createdDate," +
                                "@l_verbose," +
                                "@l_message)";
-            string s = ConfigurationManager.ConnectionStrings["CalculatorContext2"].ConnectionString;
-            SqlConnection con = new SqlConnection(s);
+            string connectionString = _configOptions.ConnectionString;
+            SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sqlString, con);
             cmd.Parameters.AddWithValue("@l_createdDate", DateTime.UtcNow);
             cmd.Parameters.AddWithValue("@l_verbose", Verbose.Information.ToString());
